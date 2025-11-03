@@ -20,4 +20,4 @@ void converteParaMaiusculas(char *s){
             *s -= 32;    //converte para letra maiúscula ASCII
         ++s;    //incrementa s para apontar para o próximo caractere
     }
-}
+}	

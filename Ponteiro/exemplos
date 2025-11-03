@@ -1,0 +1,78 @@
+exemplos de declaracao:
+	const int *p //ponteiro para int constante
+	int *const p // ponteiro  constante para int (o endereco nao muda)
+	const int * const p //ponteiro constante para int constante
+	
+	Diga o que cada um é:
+		1. char const *p; // ponteiro para char constante
+		2. char * const p; // ponteiro constante para char
+		3. char const * const p; // ponteiro constante para um char constante??
+		4. char ** const pp; // ponteiro de ponteiro constante para char
+		5. char * const * pp; // ponteiro para ponteiro constante para char  
+		6. char const ** pp; // ponteiro de ponteiro para char constante
+		
+		a) const int *p; //Ponteiro para inteiro constante
+						 //(nao posso alterar o valor apontado)
+		b) int * const p;//ponteiro constante para inteiro
+						 //(nao posso mudar o endereco armazenado)
+		c) const int * const p; //ponteiro constante para inteiro constante
+								//(nem endereco nem valor podem mudar)
+		
+		
+		Dado o codigo:
+		int x = 5, y = 8;
+		int * const p = &x;
+		
+		*p = 6; // invalida pq o ponteiro eh constante e nao pode apontar outro endereceo
+		p = &y; // eh valida pq o conteudo de pode mudar
+		
+		Analise e diga oq eh invalido
+		int x = 10, y = 20;
+		const int *p1 = &x;
+		int * const p2 = &x;
+		
+		*p2 = 15;	//valido pq p2 pode alterar o conteudo de x
+		p1 = &y;	//valido pois p1 pode mudar de alvo
+		p2 = &y;	//invalido pois p2 eh ponteiro constante
+		*p1 = 25;	//invalido pq p1 eh constante e nao pode alterar x p1)
+		
+		Dado o prototipo a seguir:
+		void maior_menor(int *v, int tam, int *maior, int *menor);
+		
+		implemente a função referente a esse prototipo
+		
+		void maior_menor(int v[], int tam, int *maior, int *menor)
+		
+		//IMPLEMENTACAO - no arquivo 'funcPont2.c'
+		#include <stdio.h>
+		#include <stdlib.h>
+		#define TAM 5
+
+		void maior_menor(int *v, int tam, int *maior, int *menor){		
+			int dmaior = v[0], dmenor = v[0];
+			for(int i = 0; i < TAM; i++){
+				if (v[i] > dmaior){
+					dmaior = v[i];			
+				} else if (v[i] < dmenor){
+					dmenor = v[i];
+				}
+			}
+			
+			*maior = dmaior;
+			*menor = dmenor;
+		}
+
+		int main (){
+			int v[TAM] = {20, 5, 6, 28, 2};
+			int maior, menor;
+			
+			maior_menor(v, TAM, &maior, &menor);
+			for(int i = 0; i < TAM; i++){
+				printf("%d ", v[i]);
+			}
+			
+			printf("\nMaior: %d   Menor: %d", maior, menor);
+			
+			return 0;
+		}
+		
